@@ -8,6 +8,7 @@ var frontColor;
 
 var recordingsInfo;
 var recordingsList;
+var mbids;
 var pitchSpace;
 var noteList = [];
 var soundList = {};
@@ -55,6 +56,7 @@ var secondClick = false;
 var images = [];
 
 function preload() {
+  recordingsList = loadJSON("../files/makamFollowing-recordingsList.json");
   recordingsInfo = loadJSON("files/recordingsInfo.json");
 }
 
@@ -76,7 +78,7 @@ function setup () {
   backColor = color(240, 128, 128);
   frontColor = color(120, 0, 0);
 
-  recordingsList = recordingsInfo["recordingsList"];
+  mbids = recordingsList.recordingsList;
 
   infoLink = select("#info-link");
   infoLink.position(width-60, extraSpaceH + margin*3.5 + 30);
@@ -91,8 +93,8 @@ function setup () {
   noRec[0].setAttribute("disabled", "true");
   noRec[0].setAttribute("hidden", "true");
   noRec[0].setAttribute("style", "display: none");
-  for (var i = 0; i < recordingsList.length; i++) {
-    select.option(recordingsInfo[recordingsList[i]].info.option, i);
+  for (var i = 0; i < mbids.length; i++) {
+    select.option(recordingsInfo[mbids[i]].info.option, i);
   }
   buttonPlay = createButton("Load audio")
     .size(120, 25)
@@ -158,7 +160,7 @@ function draw () {
     // Usul Information
     //dataDir = join(['files/',usul,'.jpg'],'');
     //img = loadImage(dataDir);
-    //image(img,100,100);    
+    //image(img,100,100);
    }
 
   // stroke("red");
@@ -186,12 +188,12 @@ function draw () {
   if(loaded){
     if(!paused){
       currentTime = track.currentTime();
-      
+
       if(looped && secondClick){
         if(loopTimeEnd-currentTime < 0.01){
           track.jump(loopTimeStart);
-        }   
-      }    
+        }
+      }
     }
   }
 
@@ -218,7 +220,7 @@ function draw () {
       text(str(p.toFixed(2)) + ' cents', width-margin, navBox.y1 - margin);
     }
   }
-  navBox.displayFront(); 
+  navBox.displayFront();
 }
 
 function createNavigationBox () {
@@ -244,7 +246,7 @@ function createNavigationBox () {
     line(this.x1, this.y2, this.x2, this.y2);
   }
 
-  
+
 
   this.clicked = function () {
 
@@ -271,17 +273,17 @@ function createNavigationBox () {
           dummy = loopBound0;
           loopBound0 = loopBound1;
           loopBound1 = dummy;
-          loopTimeStart = map(loopBound0, this.x1, this.x2, 0, trackDuration).toFixed(2);      
+          loopTimeStart = map(loopBound0, this.x1, this.x2, 0, trackDuration).toFixed(2);
         }
         loopTimeEnd = map(loopBound1, this.x1, this.x2, 0, trackDuration).toFixed(2);
-        firstClick = false;         
+        firstClick = false;
       }else if ((!firstClick) && click) {
         firstClick = true;
         loopBound0 = mouseX;
         loopTimeStart = map(loopBound0, this.x1, this.x2, 0, trackDuration).toFixed(2);
         secondClick = false;
       }
-    }      
+    }
   }
 }
 
@@ -387,7 +389,8 @@ function start () {
   loaded = false;
   paused = true;
   currentTime = 0;
-  var currentRecording = recordingsInfo[recordingsList[select.value()]];
+  var mbid = mbids[select.value()];
+  var currentRecording = recordingsInfo[mbid];
   easing = currentRecording.info.easing;
   trackFile = currentRecording.info.trackFile;
   title = currentRecording.info.title;
@@ -408,7 +411,7 @@ function start () {
     createSound(pitchSpace[i]);
     noteList.push(note);
   }
-  pitchTrack = currentRecording.melody.pitchTrack;
+  pitchTrack = loadJSON("../files/pitchTracks/" + mbid + "_pitchTrack.json");
   clock = new CreateClock;
   buttonPlay.html("Load audio");
   buttonPlay.removeAttribute("disabled");
@@ -433,7 +436,7 @@ function CreateClock () {
 function player () {
   if (loaded) {
     if (paused) {
-      paused = false;     
+      paused = false;
       if (jump == undefined) {
       track.play();
       } else {
@@ -477,7 +480,7 @@ function mouseClicked () {
 }
 
 function keyPressed () {
-  var rewind = 5; 
+  var rewind = 5;
   if(keyCode == LEFT_ARROW && loaded && (!paused) ){
     rewindd(rewind);
   }else if(keyCode == RIGHT_ARROW && loaded && (!paused)){
@@ -522,7 +525,7 @@ function keyReleased () {
 // Play/ Pause with the spacebar
 function keyTyped() {
   if (key === ' ' && loaded) {
-    player();  
+    player();
   }
 }
 
