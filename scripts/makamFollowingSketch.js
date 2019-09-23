@@ -56,7 +56,7 @@ var secondClick = false;
 var images = [];
 
 function preload() {
-  recordingsList = loadJSON("../files/makamFollowing-recordingsList.json");
+  recordingsList = loadJSON("files/makamFollowing-recordingsList.json");
   recordingsInfo = loadJSON("files/recordingsInfo.json");
 }
 
