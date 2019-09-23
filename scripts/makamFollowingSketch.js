@@ -411,7 +411,7 @@ function start () {
     createSound(pitchSpace[i]);
     noteList.push(note);
   }
-  pitchTrack = loadJSON("../files/pitchTracks/" + mbid + "_pitchTrack.json");
+  pitchTrack = loadJSON("files/pitchTracks/" + mbid + "_pitchTrack.json");
   clock = new CreateClock;
   buttonPlay.html("Load audio");
   buttonPlay.removeAttribute("disabled");
