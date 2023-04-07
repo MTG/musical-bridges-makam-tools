@@ -5,20 +5,17 @@
 
 body {
   width: 100%;
+  background-image: linear-gradient(white, #C8A2E5);
 }
 
-main{
+main, section, footer, nav {
   background-color: white;
   width: 900px;
   margin: 0 auto;
   padding: 20px 30px;
 }
 
-nav{
-  background-color: white;
-  width: 900px;
-  margin: 0 auto;
-  padding: 20px 0px;
+nav {
   height: 1em;
   margin-bottom: 2px;
 }
@@ -36,13 +33,13 @@ nav{
 }
 
 #help{
-  color: #900;    
+  color: #900;
   float : left;
   font-size: 1.3em;
-}  
+}
 
 #home{
-  color: #900;    
+  color: #900;
   float : left;
   font-size: 1.3em;
 }
@@ -68,18 +65,24 @@ li {
 
 #sketch-holder {
   border: 3px inset;
-} 
+}
 
 #sketch-line {
   border: 1px inset;
-} 
+}
+
+footer {
+  margin-top: 2px;
+  text-align: center;
+  padding-top: 15px;
+  padding-bottom: 15px;
+}
 
 img {
   display: inline-block;
 }
 
 section {
-  background-color: white;
   width: 900px;
   margin: 2px auto;
   padding: 10px 30px;
@@ -88,7 +91,30 @@ section {
 }
 
 section p {
-  padding-bottom: 0.5em;
+  padding-bottom: 0.2em;
   text-align: center;
 }
 
+#musicalbridges {
+  height: 60px;
+}
+
+.logo {
+  height: 50px;
+}
+
+/* footer span {
+  color: #79489F;
+  font-weight: bold;
+} */
+
+footer div {
+  display: inline-block;
+  vertical-align: middle;
+}
+
+footer p {
+  font-size: 0.8em;
+  padding-bottom: 0.5em;
+  /* text-align: center; */
+}
