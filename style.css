@@ -5,7 +5,8 @@
 
 body {
   width: 100%;
-  background-image: linear-gradient(white, #C8A2E5);
+  /* background-image: linear-gradient(white, #C8A2E5); */
+  background-image: linear-gradient(white, #F08080);
 }
 
 main, section, footer, nav {
