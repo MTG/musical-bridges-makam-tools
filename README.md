@@ -1,4 +1,4 @@
-# Makam Tools
+# Musical Bridges - Makam Tools
 An audio-visual tool made for helping users understand and appreciate Makam Music.
 
 The audio recordings are complimented by a visual display which keeps track of the melody on a line that by observing, it strengthens the pitch hight and the note interval perceptions of this Ottoman/Turkish Musical Tradition.
